@@ -1,10 +1,6 @@
-#!/usr/bin/env node
 
-import readlineSync from 'readline-sync';
-import playEvenGame from '../src/games/even.js';
 
-console.log('Welcome to the Brain Games!');
-const name = readlineSync.question('May I have your name? ');
-console.log(`Hello, ${name}!`);
+import runGame from '../src/index.js';
+import generateRound from '../src/games/even.js';
 
-playEvenGame(name);
+runGame('Answer "yes" if the number is even, otherwise answer "no".', generateRound);
