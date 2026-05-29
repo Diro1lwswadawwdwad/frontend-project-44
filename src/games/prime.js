@@ -1,19 +1,37 @@
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+import readlineSync from 'readline-sync';
 
 const isPrime = (num) => {
-    if (num < 2) return false;
-    for (let i = 2; i <= Math.sqrt(num); i += 1) {
-        if (num % i === 0) return false;
-    }
-    return true;
+  if (num < 2) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
 };
 
-const generateRound = () => {
-    const number = getRandomInt(1, 100);
-    const question = String(number);
-    const correctAnswer = isPrime(number) ? 'yes' : 'no';
+const playPrimeGame = (playerName) => {
+  console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
+  
+  let correctAnswersCount = 0;
+  const requiredCorrectAnswers = 3;
+
+  while (correctAnswersCount < requiredCorrectAnswers) {
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    console.log(`Question: ${randomNumber}`);
     
-    return [question, correctAnswer];
+    const userAnswer = readlineSync.question('Your answer: ').toLowerCase();
+    const correctAnswer = isPrime(randomNumber) ? 'yes' : 'no';
+
+    if (userAnswer === correctAnswer) {
+      console.log('Correct!');
+      correctAnswersCount += 1;
+    } else {
+      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
+      console.log(`Let's try again, ${playerName}!`);
+      return;
+    }
+  }
+
+  console.log(`Congratulations, ${playerName}!`);
 };
 
-export default generateRound;
+export default playPrimeGame;

@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
-import runGame from '../src/index.js';
-import generateRound from '../src/games/prime.js';
+import readlineSync from 'readline-sync';
+import playPrimeGame from '../src/games/prime.js';
 
-const gameDescription = 'Answer "yes" if given number is prime, otherwise answer "no".';
+console.log('Welcome to the Brain Games!');
+const name = readlineSync.question('May I have your name? ');
+console.log(`Hello, ${name}!`);
 
-runGame(generateRound, gameDescription);
+playPrimeGame(name);
